@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduCourse Hub</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f4f6f9;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: #4A00E0;
+  color: white;
+  padding: 20px;
+}
+
+/* Grid */
+.course-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 20px;
+}
+
+/* Card */
+.course-card {
+  width: 260px;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.course-card:hover {
+  transform: scale(1.05);
+}
+
+.course-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.course-card h3 {
+  margin: 10px;
+  color: #4A00E0;
+}
+
+/* Info */
+#info {
+  margin: 15px;
+  font-weight: bold;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px black;
+  text-align: left;
+}
+
+.modal h2 {
+  color: #4A00E0;
+}
+
+.modal ul {
+  padding-left: 20px;
+}
+
+.modal button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #4A00E0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎓 EduCourse Hub</h1>
+</header>
+
+<h2>Click for Preview | Double Click for Full Details</h2>
+
+<div class="course-container">
+
+  <!-- Graphic Design -->
+  <div class="course-card"
+       onclick="showInfo('design')"
+       ondblclick="openModal('design')">
+    <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=60">
+    <h3>🎨 Graphic Design</h3>
+  </div>
+
+  <!-- Data Analysis -->
+  <div class="course-card"
+       onclick="showInfo('data')"
+       ondblclick="openModal('data')">
+    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=60">
+    <h3>📊 Data Analysis</h3>
+  </div>
+
+  <!-- AI -->
+  <div class="course-card"
+       onclick="showInfo('ai')"
+       ondblclick="openModal('ai')">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60">
+    <h3>🤖 Artificial Intelligence</h3>
+  </div>
+
+</div>
+
+<p id="info"></p>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <h2 id="title"></h2>
+  <p><b>Instructor:</b> <span id="instructor"></span></p>
+  <p><b>Duration:</b> <span id="duration"></span></p>
+  <p><b>Price:</b> ₹<span id="price"></span></p>
+
+  <h4>What You Will Learn:</h4>
+  <ul id="learn"></ul>
+
+  <button onclick="closeModal()">Close</button>
+</div>
+
+<script>
+const courses = {
+  design: {
+    preview: "Learn creative design tools 🎨",
+    title: "Graphic Design",
+    instructor: "John Smith",
+    duration: "6 Weeks",
+    price: "1999",
+    learn: [
+      "Photoshop & Illustrator",
+      "Logo Design",
+      "Branding",
+      "UI/UX Basics"
+    ]
+  },
+  data: {
+    preview: "Analyze data like a pro 📊",
+    title: "Data Analysis",
+    instructor: "Sarah Lee",
+    duration: "8 Weeks",
+    price: "2499",
+    learn: [
+      "Excel & Python",
+      "Data Visualization",
+      "Statistics",
+      "Real Projects"
+    ]
+  },
+  ai: {
+    preview: "Build AI systems 🤖",
+    title: "Artificial Intelligence",
+    instructor: "David Kumar",
+    duration: "10 Weeks",
+    price: "3999",
+    learn: [
+      "Machine Learning",
+      "Neural Networks",
+      "Deep Learning",
+      "AI Projects"
+    ]
+  }
+};
+
+/* Single Click */
+function showInfo(course) {
+  document.getElementById("info").innerText =
+    courses[course].preview;
+}
+
+/* Double Click */
+function openModal(course) {
+  document.getElementById("title").innerText = courses[course].title;
+  document.getElementById("instructor").innerText = courses[course].instructor;
+  document.getElementById("duration").innerText = courses[course].duration;
+  document.getElementById("price").innerText = courses[course].price;
+
+  let list = "";
+  courses[course].learn.forEach(item => {
+    list += "<li>" + item + "</li>";
+  });
+
+  document.getElementById("learn").innerHTML = list;
+
+  document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
+
+Perfect! I see that you already have a course catalog page with:
+
+Cards for Graphic Design, Data Analysis, AI
+Single-click preview (showInfo)
+Double-click modal with full details (openModal)
+
+Now, to make this full learning-ready, we can add lessons, videos, and materials for each course inside the modal or a dedicated learning section.
+
+Here’s an upgraded version with per-course lessons, video, and downloadable materials:
+
+<!-- Replace your current modal section with this -->
+<div id="modal" class="modal">
+  <h2 id="title"></h2>
+  <p><b>Instructor:</b> <span id="instructor"></span></p>
+  <p><b>Duration:</b> <span id="duration"></span></p>
+  <p><b>Price:</b> ₹<span id="price"></span></p>
+
+  <h4>What You Will Learn:</h4>
+  <ul id="learn"></ul>
+
+  <h4>Lessons:</h4>
+  <div id="lessons"></div>
+
+  <div id="lessonContent" style="margin-top: 10px;">
+    <iframe id="video" width="100%" height="200" src="" frameborder="0" allowfullscreen></iframe>
+    <div class="materials">
+      <a id="ppt" href="#" target="_blank">📊 Download PPT</a>
+      <a id="notes" href="#" target="_blank">📝 Download Notes</a>
+    </div>
+  </div>
+
+  <button onclick="closeModal()">Close</button>
+</div>
+
+<script>
+const courses = {
+  design: {
+    preview: "Learn creative design tools 🎨",
+    title: "Graphic Design",
+    instructor: "John Smith",
+    duration: "6 Weeks",
+    price: "1999",
+    learn: ["Photoshop & Illustrator","Logo Design","Branding","UI/UX Basics"],
+    lessons: [
+      {name:"Intro to Design", video:"https://www.youtube.com/embed/tgbNymZ7vqY", ppt:"#", notes:"#"},
+      {name:"Photoshop Basics", video:"https://www.youtube.com/embed/3fumBcKC6RE", ppt:"#", notes:"#"}
+    ]
+  },
+  data: {
+    preview: "Analyze data like a pro 📊",
+    title: "Data Analysis",
+    instructor: "Sarah Lee",
+    duration: "8 Weeks",
+    price: "2499",
+    learn: ["Excel & Python","Data Visualization","Statistics","Real Projects"],
+    lessons: [
+      {name:"Data Intro", video:"https://www.youtube.com/embed/8hly31xKli0", ppt:"#", notes:"#"},
+      {name:"Excel Basics", video:"https://www.youtube.com/embed/tgbNymZ7vqY", ppt:"#", notes:"#"}
+    ]
+  },
+  ai: {
+    preview: "Build AI systems 🤖",
+    title: "Artificial Intelligence",
+    instructor: "David Kumar",
+    duration: "10 Weeks",
+    price: "3999",
+    learn: ["Machine Learning","Neural Networks","Deep Learning","AI Projects"],
+    lessons: [
+      {name:"AI Intro", video:"https://www.youtube.com/embed/3fumBcKC6RE", ppt:"#", notes:"#"},
+      {name:"Machine Learning Basics", video:"https://www.youtube.com/embed/8hly31xKli0", ppt:"#", notes:"#"}
+    ]
+  }
+};
+
+/* Single Click */
+function showInfo(course) {
+  document.getElementById("info").innerText = courses[course].preview;
+}
+
+/* Double Click */
+function openModal(course) {
+  const c = courses[course];
+  document.getElementById("title").innerText = c.title;
+  document.getElementById("instructor").innerText = c.instructor;
+  document.getElementById("duration").innerText = c.duration;
+  document.getElementById("price").innerText = c.price;
+
+  // Show learning points
+  document.getElementById("learn").innerHTML = c.learn.map(i=>`<li>${i}</li>`).join("");
+
+  // Show lessons
+  const lessonsDiv = document.getElementById("lessons");
+  lessonsDiv.innerHTML = "";
+  c.lessons.forEach((lesson, index)=>{
+    const ldiv = document.createElement("div");
+    ldiv.className = "lesson";
+    ldiv.innerText = lesson.name;
+    ldiv.onclick = ()=>loadLesson(course,index);
+    lessonsDiv.appendChild(ldiv);
+  });
+
+  // Load first lesson
+  loadLesson(course,0);
+
+  document.getElementById("modal").style.display = "block";
+}
+
+function loadLesson(course,index){
+  const lesson = courses[course].lessons[index];
+  document.getElementById("video").src = lesson.video;
+  document.getElementById("ppt").href = lesson.ppt;
+  document.getElementById("notes").href = lesson.notes;
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
+</script>
